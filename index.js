@@ -10,6 +10,7 @@ const io = require("socket.io")(server, {
 }
 });
 
+`npm install @material-ui/core @material-ui/icons react-copy-to-clipboard simple-peer socket.io-client`
 app.use(cors());
 
 const PORT = process.env.PORT || 5000;
