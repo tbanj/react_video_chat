@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Grid, Typography, Paper } from '@material-ui/core';
 
 const VideoPlayer = () => {
   return (
