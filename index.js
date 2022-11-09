@@ -28,8 +28,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('calluser', ({ userToCall, signalData, from, name}) => {
-        console.warn('calluser api', userToCall, signalData, from, name);
-        io.to(userToCall).emit('calluser', { signalData: signalData, from , name});
+        io.to(userToCall).emit('calluser', { signal: signalData, from , name});
     });
 
     socket.on('answercall', (data) => {
