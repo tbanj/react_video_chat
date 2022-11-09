@@ -2,9 +2,9 @@ import React, { useContext, useState } from 'react';
 import { Button, TextField, Grid, Typography, Container, Paper, makeStyles } from '@material-ui/core';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Assignment, Phone, PhoneDisabled } from "@material-ui/icons";
-import { SocketContent } from '../SocketContext';
+import { SocketContent, SocketContext } from '../SocketContext';
 import {styled} from '@material-ui/styles';
-import { useHistory } from'react-router-dom';
+// import { useHistory } from'react-router-dom';
 
 import { Socket } from 'socket.io-client';
 
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
    }));
 
 const Options = ({children}) => {
-    const  { me, callAccepted, name, setName, callEnded, leaveCall, callUser} = useContext(Socket)
+    const  { me, callAccepted, name, setName, callEnded, leaveCall, callUser} = useContext(SocketContext)
     const [idToCall, setIdToCall] = useState('');
     const classes = useStyles();
 
@@ -57,6 +57,7 @@ const Options = ({children}) => {
                             onChange={(e)=> setName(e.target.value)}
                             fullWidth />
                             <CopyToClipboard text={me} className={classes.margin}>
+                                
                                 <Button variant='contained' color='primary' fullWidth 
                                 startIcon={<Assignment fontSize='large' />}>
                                         Copy Your ID
@@ -68,21 +69,21 @@ const Options = ({children}) => {
                         <Grid item xs={12} md={6} className={classes.padding}>
                             <Typography gutterBottom variant='h6'>Make a call</Typography>
                             <TextField label={"ID to Call"} value={idToCall}
+                            
                             onChange={(e)=> setIdToCall(e.target.value)}
                             fullWidth />
                              {(callAccepted && !callEnded) ? (
                                 <Button variant='contained'  fullWidth className={classes.margin} onClick={leaveCall} color='secondary' startIcon={<PhoneDisabled fontSize='large'/>}>
                                     Hang Up
                                 </Button>
-                            ): (<Button variant='contained'  fullWidth className={classes.margin} onClick={()=> callUser(idToCall )} color='primary' startIcon={<Phone fontSize='large'/>}>
+                            ): (<Button variant='contained'  fullWidth className={classes.margin} onClick={()=> callUser(idToCall)} color='primary' startIcon={<Phone fontSize='large'/>}>
                                     Call
                             </Button>)}
                         </Grid>
                     </Grid>
                 </form>
+                {children}
             </Paper>
-            Option
-            {children}
         </Container>
     )
 }
