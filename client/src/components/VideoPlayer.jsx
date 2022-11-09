@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Grid, Typography, Paper, makeStyles } from '@material-ui/core';
 
 import { SocketContext } from '../SocketContext';
@@ -24,26 +24,37 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const VideoPlayer = () => {
+    const {name, callAccepted, myVideo, userVideo, callEnded, stream, call} = useContext(SocketContext)
     const classes = useStyles();
 
     return (
         <Grid container className={classes.gridContainer}>
             {/*  Our own video */}
-            <Paper className={classes.paper}>
-                <Grid item xs={12} md={6}>
-                    <Typography variant="h5" gutterBottom>Name </Typography>
-                     <video playsInline muted ref={null} autoPlay className={classes.video}/>
-                </Grid>
-            </Paper>
+            {
+                stream && (
+                    <Paper className={classes.paper}>
+                        <Grid item xs={12} md={6}>
+                            <Typography variant="h5" gutterBottom>{name || 'Name' }</Typography>
+                            <video playsInline muted ref={myVideo} autoPlay className={classes.video}/>
+                        </Grid>
+                    </Paper>
+                )
+            }
+            
 
             {/* User's video */}
-            <Paper className={classes.paper}>
-                <Grid item xs={12} md={6}>
-                    <Typography variant="h5" gutterBottom>Name </Typography>
-                    <video playsInline muted ref={null} autoPlay className={classes.video}/>
-                </Grid>
-                
-            </Paper>
+            {
+                (callAccepted && !callEnded)  && (
+                    <Paper className={classes.paper}>
+                        <Grid item xs={12} md={6}>
+                            <Typography variant="h5" gutterBottom>{call.name || 'Name' }</Typography>
+                            <video playsInline muted ref={userVideo} autoPlay className={classes.video}/>
+                        </Grid>
+                    
+                    </Paper>
+                )
+            }
+            
         </Grid>
   )
 }
