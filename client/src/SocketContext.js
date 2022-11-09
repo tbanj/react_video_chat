@@ -22,13 +22,13 @@ const ContextProvider =({ children}) => {
     useEffect(() => {
       
         navigator.mediaDevices.getUserMedia({ video: true, audio: true})
-        .then(currentStream=> {
+        .then((currentStream)=> {
                        setStream(currentStream);
 
                        myVideo.current.srcObject = currentStream;
         });
          
-        socket.on('me', (id) => {setMe(me)});
+        socket.on('me', (id) => {setMe(id)});
 
         socket.on('calluser', ({from, name: callerName, signal}) => {
             setCall({isReceivedCall: true, from, name: callerName, signal});
@@ -56,10 +56,11 @@ const ContextProvider =({ children}) => {
     } 
     
     const callUser = (id) => {
+        console.warn('callUser', id);
         const peer = new Peer({initiator: true, trickle: false, stream});
-
+        console.warn('peer', peer);
         peer.on('signal', (data) => { 
-            socket.emit('calluser ', {userToCall: id, signalData: data, from: me, name})
+            socket.emit('calluser', {userToCall: id, signalData: data, from: me, name})
         });
 
         peer.on('stream', (currentStream) => {
