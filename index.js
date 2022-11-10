@@ -20,7 +20,6 @@ app.get("/", (req, res) => {
 
 io.on('connection', (socket) => {
     // socket.on('message', (message) => {}
-    console.warn('connect', socket.id);
     socket.emit('me', socket.id);
 
     socket.on('disconnect', () => {
