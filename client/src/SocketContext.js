@@ -8,7 +8,7 @@ const SocketContext = createContext();
 
 // const socket = io('http://localhost:5001/netflix-clone-temi/us-central1/app');
 
-const socket = io('https://reactvideochatapp.mybluemix.net');
+const socket = io(process.env.REACT_APP_BACKEND_API);
 const ContextProvider =({ children}) => {
 
     const [stream, setStream] = useState(null);
