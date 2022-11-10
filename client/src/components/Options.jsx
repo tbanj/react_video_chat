@@ -56,7 +56,6 @@ const Options = ({children}) => {
                             <TextField label={"Name"} value={name} 
                             onChange={(e)=> setName(e.target.value)}
                             fullWidth />
-                            {console.log('me', me)}
                             <CopyToClipboard text={me} className={classes.margin}>
                                 
                                 <Button variant='contained' color='primary' fullWidth 
