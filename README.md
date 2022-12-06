@@ -1,4 +1,7 @@
-# Realtime Chat Application
+# Proof of Concept(POC) Realtime Video Chat Application
+
+Live demonstrtion of the application is hosted at
+https://react-video-chat-dusky.vercel.app/
 
 ![Video Chat](https://user-images.githubusercontent.com/20041050/201003295-087ef52f-a3c0-4f57-adab-3110fdb26e37.png)
 
